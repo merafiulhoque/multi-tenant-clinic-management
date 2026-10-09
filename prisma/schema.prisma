@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+enum Role {
+  RECEPTIONIST
+  STAFF
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+}
+
+model Owner {
+  ownerId Int @id
+  email String @unique
+  isPremium Boolean @default(false)
+  premiumExpiry DateTime?
+  clinics Clinic[]
+}
+
+model Clinic {
+  id Int @id @default(autoincrement())
+  ownerId Int
+  owner Owner @relation(fields: [ownerId], references: [ownerId])
+  name String
+  location String
+  doctors Doctor[]
+  staffs Staff[]
+}
+
+model Doctor {
+  id Int @id @default(autoincrement())
+  firstName String
+  lastName String?
+  displayName String?
+  email String
+
+  specialization String?
+  qualification String?
+  registrationNumber String?
+  experienceYears Int?
+
+  bio             String?
+  profileImageUrl String?
+
+  status Status
+
+  clinicId Int
+  clinic Clinic @relation(fields: [clinicId], references: [id])
+
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+}
+
+model Staff {
+  id Int @id @default(autoincrement())
+  email String @unique
+  password String
+  role Role
+  clinicId Int
+  clinic Clinic @relation(fields: [clinicId], references: [id])
+}

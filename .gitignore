@@ -1,0 +1,9 @@
+.agents
+.claude
+.cursor
+.devin
+node_modules/
+.env
+skills-lock.json
+/src/generated/prisma
+EDGE_CASES_TO_LOOKUP.md
