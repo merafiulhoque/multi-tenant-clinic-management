@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { ENDPOINTS } from "../shared/constants/endpoint.js";
 import { asyncHandler } from "../shared/global_handlers/asyncHandler.js";
-import { ownerRegistration } from "../features/owner_module/registration/handler.js";
+import { ownerRegistration } from "../features/user/registration/handler.js";
 import { handler as GetOTP } from "../features/emails/getOtp/handler.js";
 import { handler as VerifyOTP } from "../features/emails/verifyOtp/handler.js";
-import { handler as ownerLogin} from "../features/owner_module/signin/handler.js";
+import { handler as ownerLogin} from "../features/user/signin/handler.js";
 
 export const router = Router()
 

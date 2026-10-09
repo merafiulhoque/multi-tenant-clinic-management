@@ -9,8 +9,10 @@ datasource db {
 
 
 enum Role {
+  OWNER
   RECEPTIONIST
   STAFF
+  LAB_MANAGER
 }
 
 enum Status {
@@ -18,22 +20,25 @@ enum Status {
   INACTIVE
 }
 
-model Owner {
-  ownerId Int @id
+model User {
+  userId Int @id //auth service user id
   email String @unique
   isPremium Boolean @default(false)
   premiumExpiry DateTime?
-  clinics Clinic[]
+  ownedClinics Clinic[] @relation("ClinicOwner")
+  clinicMembers ClinicMember[]
 }
 
 model Clinic {
   id Int @id @default(autoincrement())
-  ownerId Int
-  owner Owner @relation(fields: [ownerId], references: [ownerId])
   name String
   location String
   doctors Doctor[]
-  staffs Staff[]
+  ownerId Int
+  owner User @relation("ClinicOwner", fields: [ownerId], references: [userId])
+  clinicMembers ClinicMember[]
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
 }
 
 model Doctor {
@@ -42,6 +47,7 @@ model Doctor {
   lastName String?
   displayName String?
   email String
+  fees Int
 
   specialization String?
   qualification String?
@@ -51,7 +57,7 @@ model Doctor {
   bio             String?
   profileImageUrl String?
 
-  status Status
+  status Status @default(ACTIVE)
 
   clinicId Int
   clinic Clinic @relation(fields: [clinicId], references: [id])
@@ -60,11 +66,16 @@ model Doctor {
   updatedAt       DateTime     @updatedAt
 }
 
-model Staff {
-  id Int @id @default(autoincrement())
-  email String @unique
-  password String
-  role Role
+model ClinicMember {
+  userId Int
   clinicId Int
   clinic Clinic @relation(fields: [clinicId], references: [id])
+  role Role
+  status Status @default(ACTIVE)
+  user User @relation(fields: [userId], references: [userId])
+
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  @@id([userId, clinicId])
+
 }

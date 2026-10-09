@@ -1,4 +1,5 @@
-export const ERR_RESPONSE = {
-    ERR_INVALID_INPUT: "invalid input",
-    ERR_UNAUTHORIZED: "unauthorized"
+export const ERR_MSG = {
+    INVALID_INPUT: "invalid input",
+    UNAUTHORIZED: "unauthorized",
+    BAD_REQUEST: "bad request"
 } as const

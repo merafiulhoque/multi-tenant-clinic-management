@@ -1,7 +1,7 @@
 import { prisma } from "../../shared/clients/prisma.js";
 import { AUTH_SERVICE_ENDPOINTS } from "../../shared/constants/endpoint.js";
 import { AppError } from "../../shared/global_handlers/errorHandler.js";
-import { ApiResponse } from "../../shared/types/index.js";
+import { ApiResponse, JWT_BASE_CLAIM } from "../../shared/types/index.js";
 import { ownerRegistrationData, ownerSigninData } from "./schema.js";
 import { SIGNIN_RESPONSE_DATA } from "./types.js";
 
@@ -26,20 +26,18 @@ export const createOwnerAccountInAuthService = async (
     return resData
 }
 
-export const createOwner = async (
+export const createUser = async (
     email: string,
     id: number
-): Promise<number> => {
-    const { ownerId } = await prisma.owner.create({
+): Promise<JWT_BASE_CLAIM> => {
+    const newUser = await prisma.user.create({
         data: {
-            ownerId: id,
+            userId: id,
             email: email
         },
-        select: {
-            ownerId: true
-        }
+        select: {userId: true, email: true}
     })
-    return ownerId
+    return newUser
 }
 
 export const ownerSignin = async (
