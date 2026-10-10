@@ -7,3 +7,4 @@ node_modules/
 skills-lock.json
 /src/generated/prisma
 EDGE_CASES_TO_LOOKUP.md
+.idea
