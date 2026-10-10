@@ -44,23 +44,39 @@ export const ownerSignin = async (
     signal: AbortSignal,
     data: ownerSigninData
 ): Promise<[ApiResponse<SIGNIN_RESPONSE_DATA>, number]> => {
-    try {
-        const res = await fetch(
-            AUTH_SERVICE_ENDPOINTS.SIGNIN,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data),
-                signal
-            }
-        )
-        if (res.status === 405){
-            throw new AppError(405, "method not allowed")
+
+    const res = await fetch(
+        AUTH_SERVICE_ENDPOINTS.SIGNIN,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data),
+            signal
         }
-        return [await res.json(), res.status]
-    } catch(err){
-        throw err
+    )
+    if (res.status === 405){
+        throw new AppError(405, "method not allowed")
     }
+    return [await res.json(), res.status]
+
+}
+
+export const getAuthServiceUserId = async (
+    signal: AbortSignal,
+    email: string
+): Promise<ApiResponse<number>> => {
+    const res = await fetch(
+        AUTH_SERVICE_ENDPOINTS.GET_ID,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({email: email}),
+            signal
+        }
+    )
+    return await res.json()
 }

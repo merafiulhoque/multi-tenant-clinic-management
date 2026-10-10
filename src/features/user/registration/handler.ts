@@ -15,4 +15,5 @@ export const ownerRegistration = async (req: Request, res: Response) => {
             .status(response.success ? 201 : 400)
             .json(response)
 
-}   
+}
+

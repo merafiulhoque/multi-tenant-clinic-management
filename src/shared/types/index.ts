@@ -6,12 +6,7 @@ export interface ApiResponse<T> {
     data?: T
 }
 
-export interface OWNER_CLAIMS extends JwtPayload{
+export interface USER_CLAIM extends JwtPayload{
     id: number
-    email: string
-}
-
-export interface JWT_BASE_CLAIM {
-    userId: number
     email: string
 }

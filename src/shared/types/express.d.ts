@@ -1,9 +1,9 @@
+import {OWNER_CLAIMS} from "./index.js";
+
 declare global{
     namespace Express {
         interface Request {
-            user?: {
-                
-            }
+            user?: OWNER_CLAIMS
         }
     } 
 }

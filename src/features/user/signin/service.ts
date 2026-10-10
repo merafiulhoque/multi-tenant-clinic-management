@@ -1,4 +1,4 @@
-import { ownerSignin } from "../ownerRepo.js";
+import { ownerSignin } from "../userRepo.js";
 import { ownerSigninData } from "../schema.js";
 
 export const service = async (signal: AbortSignal, data: ownerSigninData) => {

@@ -8,7 +8,9 @@ export const ENDPOINTS = {
     OWNER_REGISTRATION: API_VERSION + `/owners`,
     OWNER_SIGNIN: API_VERSION + "/owners/signin",
     OWNER_EMAIL_SEND_OTP: API_VERSION + "/owner/email/get-otp",
-    OWNER_EMAIL_VERIFY_OTP: API_VERSION + "/owner/email/verify-otp"
+    OWNER_EMAIL_VERIFY_OTP: API_VERSION + "/owner/email/verify-otp",
+    CLINIC_CREATE: API_VERSION + "/clinics"
+    
 } as const
 
 export const AUTH_SERVICE_ENDPOINTS = {
@@ -16,7 +18,7 @@ export const AUTH_SERVICE_ENDPOINTS = {
     SIGNIN: AppConfig.AUTH_SERVICE_URL + "/api/v1/auth/signin",
     GET_OTP_VIA_MAIL: AppConfig.AUTH_SERVICE_URL + "/api/v1/auth/send-otp",
     VERIFY_OTP: AppConfig.AUTH_SERVICE_URL + "/api/v1/auth/verify-otp",
-
+    GET_ID: AppConfig.AUTH_SERVICE_URL + "/api/v1/auth/getuserid"
 } as const
 
 // const (
