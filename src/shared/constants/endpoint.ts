@@ -9,8 +9,8 @@ export const ENDPOINTS = {
     OWNER_SIGNIN: API_VERSION + "/owners/signin",
     OWNER_EMAIL_SEND_OTP: API_VERSION + "/owner/email/get-otp",
     OWNER_EMAIL_VERIFY_OTP: API_VERSION + "/owner/email/verify-otp",
-    CLINIC_CREATE: API_VERSION + "/clinics"
-    
+    CLINIC_CREATE: API_VERSION + "/clinics",
+    DOCTOR_CREATE: API_VERSION + "/doctors"
 } as const
 
 export const AUTH_SERVICE_ENDPOINTS = {

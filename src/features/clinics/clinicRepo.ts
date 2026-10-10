@@ -35,3 +35,15 @@ export const doesClinicExists = async (
     })
     return !!clinic
 }
+
+export const getClinicById = async (clinicId: number, ownerId: number): Promise<boolean> => {
+    return !!(await prisma.clinic.findFirst({
+        where: {
+            id: clinicId,
+            ownerId: ownerId
+        },
+        select: {
+            id: true,
+        }
+    }))
+}

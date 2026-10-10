@@ -7,6 +7,7 @@ import { handler as VerifyOTP } from "../features/emails/verifyOtp/handler.js";
 import { handler as ownerLogin} from "../features/user/signin/handler.js";
 import { getUserMiddleware } from "../shared/middlewares/getUserMiddleware.js";
 import { clinicCreateHandler } from "../features/clinics/create/handler.js";
+import {doctorCreateHandler} from "../features/doctors/create/handler.js";
 
 export const router = Router()
 
@@ -47,4 +48,11 @@ router.post(
     ENDPOINTS.CLINIC_CREATE,
     getUserMiddleware,
     asyncHandler(clinicCreateHandler)
+)
+
+//create doctor
+router.post(
+    ENDPOINTS.DOCTOR_CREATE,
+    getUserMiddleware,
+    asyncHandler(doctorCreateHandler)
 )

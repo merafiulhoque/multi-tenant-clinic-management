@@ -13,6 +13,5 @@ export const VerifyToken = (token: string): USER_CLAIM => {
     if (typeof claims === "string"){
         throw new AppError(401, ERR_MSG.UNAUTHORIZED)
     }
-    console.log(token, claims)
     return claims as USER_CLAIM
 }
